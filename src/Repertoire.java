@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,19 +11,19 @@ import java.util.Arrays;
 public class Repertoire {
     private ArrayList<Cours> cours;
 
-    public Repertoire() {
+    public Repertoire(String path) {
         cours = new ArrayList<>();
-        remplirRepertoire();
+        remplirRepertoire(path);
     }
 
     public ArrayList<Cours> getCours() {
         return this.cours;
     }
 
-    private void remplirRepertoire() {
+    private void remplirRepertoire(String path) {
         cours.clear();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("fichiers/repertoire.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.charAt(0) != '#') {
