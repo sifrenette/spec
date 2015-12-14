@@ -9,6 +9,7 @@ public class Main
         Cas cas1 = new Cas(rep, "fichiers/cas1.txt");
         Cas cas2 = new Cas(rep, "fichiers/cas2.txt");
         Cas cas3 = new Cas(rep, "fichiers/cas3.txt");
+        Cas cas4 = new Cas(rep, "fichiers/cas4.txt");
 
         final VerifChemPers verifChemPers = new VerifChemPers(prog);
         System.out.println("---------- Cas 1 ----------");
@@ -17,5 +18,7 @@ public class Main
         System.out.println(verifChemPers.verifierCas(cas2));
         System.out.println("---------- Cas 3 ----------");
         System.out.println(verifChemPers.verifierCas(cas3));
+        System.out.println("---------- Cas 4 ----------");
+        System.out.println(verifChemPers.verifierCas(cas4));
     }
 }
