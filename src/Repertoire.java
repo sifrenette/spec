@@ -30,6 +30,23 @@ public class Repertoire {
                 if (line.charAt(0) != '#') {
                     String[] data = line.split("\\ ");
 
+                    String sigle = data[0];
+                    int niveau = Integer.parseInt(data[1]);
+                    int indicateurOffre = Integer.parseInt(data[2]);
+                    boolean comporteProjet = false;
+                    if (data[3].compareTo("Vrai") == 0) {
+                        comporteProjet = true;
+                    }
+
+                    ArrayList<String> prealables;
+
+                    if (data.length > 4) {
+                        prealables = new ArrayList<String>(Arrays.asList(data[4].split("\\,")));
+                    } else {
+                        prealables = new ArrayList<>();
+                    }
+
+                    this.cours.add(new Cours(sigle, niveau, indicateurOffre, comporteProjet, prealables));
                 }
             }
         } catch (FileNotFoundException e) {

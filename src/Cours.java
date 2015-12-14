@@ -17,4 +17,24 @@ public class Cours {
         this.comporteProjet = comporteProjet;
         this.prealables = prealables;
     }
+
+    public String getSigle() {
+        return sigle;
+    }
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public int getIndicateurOffre() {
+        return indicateurOffre;
+    }
+
+    public boolean comporteProjet() {
+        return comporteProjet;
+    }
+
+    public ArrayList<String> getPrealables() {
+        return prealables;
+    }
 }
