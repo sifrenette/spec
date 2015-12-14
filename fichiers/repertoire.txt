@@ -1,0 +1,56 @@
+# Les lignes qui commencent avec '#' sont des commentaires
+# Le caractère ' ' sert de séparateur entre les différentes données
+# S'il y a plus d'un sigle pour les cours préalables, ',' sert de séparateur
+IFT-2004 2 2 Faux
+PHY-2100 2 2 Faux PHY-1003
+GLO-1901 1 1 Faux
+GIF-4200 4 2 Faux
+CHM-1000 1 2 Faux
+IFT-2002 2 1 Faux MAT-1919
+IFT-4102 4 3 Faux
+GLO-3002 3 2 Vrai
+MCB-1000 1 2 Faux
+GIF-1003 1 2 Faux
+GIF-1001 1 1 Faux
+GIF-1002 1 1 Faux
+GSE-1000 1 3 Faux
+GSO-3000 3 1 Faux
+MAT-1900 1 1 Faux
+MRK-3101 3 1 Faux
+MAT-2910 2 2 Faux MAT-1900
+STT-2920 2 1 Faux MAT-1910
+GLO-2100 2 1 Faux
+GLO-4002 4 1 Faux GLO-2004
+GLO-4003 4 1 Faux GLO-2004
+BIO-2003 2 1 Faux
+IFT-4000 4 2 Faux
+MAT-1910 1 2 Faux
+GIF-4100 4 1 Faux
+MAT-1919 1 2 Faux
+GLO-3101 3 1 Faux
+GLO-3100 3 1 Faux
+GLO-3102 3 2 Faux GLO-2004
+GLO-4000 4 1 Vrai
+GLO-4001 4 3 Faux
+CHM-1905 1 1 Faux
+GIF-3003 3 2 Faux
+ARA-4010 4 2 Faux
+IFT-3001 3 1 Faux GLO-2100
+PHY-1003 1 1 Faux
+IFT-3201 3 2 Faux GLO-2000
+GLO-2004 2 1 Faux GIF-1003
+GLG-1004 1 1 Faux
+GLO-2001 2 2 Faux GIF-1003
+GLO-3013 3 2 Faux GLO-2004,GEL-1001
+GLO-2000 2 1 Faux GIF-1001
+GLO-2003 2 2 Faux GIF-1003
+ADM-3050 3 2 Faux
+GMN-2901 2 2 Faux
+PHI-4010 4 3 Faux
+SOC-2120 2 3 Faux
+BCM-3001 3 2 Faux
+MAT-1200 1 1 Faux
+ECN-2901 2 2 Faux
+GEL-1001 1 2 Vrai
+GEL-1000 1 1 Faux
+ENT-1000 1 3 Faux
