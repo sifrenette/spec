@@ -10,11 +10,11 @@ public class Cours {
     private boolean comporteProjet;
     private ArrayList<String> prealables;
 
-    public Cours() {
-        sigle = "";
-        niveau = 0;
-        indicateurOffre = 0;
-        comporteProjet = false;
-        prealables = new ArrayList<>();
+    public Cours(String sigle, int niveau, int indicateurOffre, boolean comporteProjet, ArrayList<String> prealables) {
+        this.sigle = sigle;
+        this.niveau = niveau;
+        this.indicateurOffre = indicateurOffre;
+        this.comporteProjet = comporteProjet;
+        this.prealables = prealables;
     }
 }
