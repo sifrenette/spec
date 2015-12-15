@@ -3,6 +3,7 @@ package spec.tp3;
 import spec.tp3.Cours.Offre;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class VerifChemPers
@@ -20,18 +21,12 @@ public class VerifChemPers
     public String verifierCas(final Cas cas)
     {
         final StringBuilder result = new StringBuilder();
-        if (!this.verifierCoursDejaReussi(cas))
-            result.append("Non conformité - Des sessions futures contiennent des cours déjà réussis.\n");
-        if (!this.verifierCoursHorsProgramme(cas))
-            result.append("Non conformité - Certains cours du cheminement ne se trouvent pas dans le programme.\n");
-        if (!this.verifierCoursProjet(cas))
-            result.append("Non conformité - Certaines sessions contiennent plus qu'un cours à projet.\n");
-        if (!this.verifierNombreDeCours(cas))
-            result.append("Non conformité - Certaines sessions contiennent plus que 5 cours.\n");
-        if (!this.verifierOffreCours(cas))
-            result.append("Non conformité - Certaines sessions contiennent des cours qui ne sont pas offert à cette session.\n");
-        if (!this.verifierPrealables(cas))
-            result.append("Non conformité - Certaines sessions contiennent des cours dont les préalables ne seront pas réussis rendu à cette session.\n");
+        this.verifierCoursDejaReussi(cas).ifPresent(s -> result.append("Non conformité - ").append(s).append("\n"));
+        this.verifierCoursHorsProgramme(cas).ifPresent(s -> result.append("Non conformité - ").append(s).append("\n"));
+        this.verifierCoursProjet(cas).ifPresent(s -> result.append("Non conformité - ").append(s).append("\n"));
+        this.verifierNombreDeCours(cas).ifPresent(s -> result.append("Non conformité - ").append(s).append("\n"));
+        this.verifierOffreCours(cas).ifPresent(s -> result.append("Non conformité - ").append(s).append("\n"));
+        this.verifierPrealables(cas).ifPresent(s -> result.append("Non conformité - ").append(s).append("\n"));
 
         if (result.length() == 0) return "Le cas est conforme.";
         else
@@ -45,9 +40,9 @@ public class VerifChemPers
      * Verifie que le cas passé en paramètre ne possède pas des sessions futures contenant des cours qui ne sont pas dans le programme.
      *
      * @param cas
-     * @return si le cas ne possède pas des sessions futures contenant des cours qui ne sont pas dans le programme.
+     * @return si le cas ne possède pas des sessions futures contenant des cours qui ne sont pas dans le programme, retourne un message d'erreur
      */
-    private boolean verifierCoursHorsProgramme(final Cas cas)
+    private Optional<String> verifierCoursHorsProgramme(final Cas cas)
     {
         for (CheminementPersonnaliseSession session : cas.getSessions())
         {
@@ -55,21 +50,22 @@ public class VerifChemPers
             {
                 for (Cours cours : session.getCours())
                 {
-                    if (!programme.contientCours(cours)) return false;
+                    if (!programme.contientCours(cours))
+                        return Optional.of("Le cours " + cours + " ne se trouve pas dans le programme.");
                 }
             }
         }
 
-        return true;
+        return Optional.empty();
     }
 
     /**
      * Verifie que le cas passé en paramètre ne possède pas des sessions futures contenant des cours qui sont déjà réussis.
      *
      * @param cas
-     * @return si le cas ne possède pas des sessions futures contenant des cours qui sont déjà réussis.
+     * @return si le cas ne possède pas des sessions futures contenant des cours qui sont déjà réussis, retourne un message d'erreur
      */
-    private boolean verifierCoursDejaReussi(final Cas cas)
+    private Optional<String> verifierCoursDejaReussi(final Cas cas)
     {
         for (CheminementPersonnaliseSession session : cas.getSessions())
         {
@@ -77,21 +73,22 @@ public class VerifChemPers
             {
                 for (Cours cours : session.getCours())
                 {
-                    if (cas.getCoursReussis().contains(cours)) return false;
+                    if (cas.getCoursReussis().contains(cours))
+                        return Optional.of("Le cours " + cours + " dans la session " + session.getNumeroSession() + " est déjà réussi.");
                 }
             }
         }
 
-        return true;
+        return Optional.empty();
     }
 
     /**
      * Verifie que le cas passé en paramètre ne possède pas des sessions futures contenant des cours qui sont déjà réussis.
      *
      * @param cas
-     * @return si le cas ne possède pas des sessions futures contenant des cours qui sont déjà réussis.
+     * @return si le cas ne possède pas des sessions futures contenant des cours qui sont déjà réussis, retourne un message d'erreur
      */
-    private boolean verifierPrealables(final Cas cas)
+    private Optional<String> verifierPrealables(final Cas cas)
     {
         for (CheminementPersonnaliseSession session : cas.getSessions())
         {
@@ -111,64 +108,67 @@ public class VerifChemPers
                 {
                     if (!cas.getCoursReussis().contains(prealable) && !coursSessionsPrecedentes.contains(prealable))
                     {
-                        return false;
+                        return Optional.of("Le préalable " + prealable + " du cours " + cours + " à la session " + session.getNumeroSession() + " ne sera pas réussi rendu à cette session.");
                     }
                 }
             }
         }
 
-        return true;
+        return Optional.empty();
     }
 
     /**
      * Verifie que les cours du cas passé en paramètre sont offert à leur session.
      *
      * @param cas
-     * @return si les cours du cas passé en paramètre sont offert à leur session.
+     * @return si les cours du cas passé en paramètre sont offert à leur session, retourne un message d'erreur
      */
-    private boolean verifierOffreCours(final Cas cas)
+    private Optional<String> verifierOffreCours(final Cas cas)
     {
         for (CheminementPersonnaliseSession session : cas.getSessions())
         {
             for (Cours cours : session.getCours())
             {
-                if (session.getNumeroSession() % 2 == 0 && cours.getIndicateurOffre() == Offre.AUTOMNE) return false;
-                else if (session.getNumeroSession() % 2 == 1 && cours.getIndicateurOffre() == Offre.HIVER) return false;
+                if ((session.getNumeroSession() % 2 == 0 && cours.getIndicateurOffre() == Offre.AUTOMNE) ||
+                (session.getNumeroSession() % 2 == 1 && cours.getIndicateurOffre() == Offre.HIVER))
+                    return Optional.of("Le cours " + cours + " à la session " + session.getNumeroSession() + " n'est pas offert à cette session.");
             }
         }
 
-        return true;
+        return Optional.empty();
     }
 
     /**
      * Verifie que le cas passé en paramètre ne comporte pas plus que 5 cours.
      *
      * @param cas
-     * @return si le cas passé en paramètre ne comporte pas plus que 5 cours.
+     * @return si le cas passé en paramètre ne comporte pas plus que 5 cours, retourne un message d'erreur
      */
-    private boolean verifierNombreDeCours(final Cas cas)
+    private Optional<String> verifierNombreDeCours(final Cas cas)
     {
         for (CheminementPersonnaliseSession session : cas.getSessions())
         {
-            if (session.getCours().size() > 5) return false;
+            if (session.getCours().size() > 5)
+                return Optional.of("La session " + session.getNumeroSession() + " contient plus que 5 cours.");
         }
 
-        return true;
+        return Optional.empty();
     }
 
     /**
      * Verifie que le cas passé en paramètre ne comporte pas plus qu'un cours à projet.
      *
      * @param cas
-     * @return si le cas passé en paramètre ne comporte pas plus qu'un cours à projet.
+     * @return si le cas passé en paramètre ne comporte pas plus qu'un cours à projet, retourne un message d'erreur
      */
-    private boolean verifierCoursProjet(final Cas cas)
+    private Optional<String> verifierCoursProjet(final Cas cas)
     {
         for (CheminementPersonnaliseSession session : cas.getSessions())
         {
-            if (session.getCours().stream().filter(Cours::comporteProjet).count() > 1) return false;
+            if (session.getCours().stream().filter(Cours::comporteProjet).count() > 1)
+                return Optional.of("La session " + session.getNumeroSession() + " comporte plus d'un cours avec projet");
         }
 
-        return true;
+        return Optional.empty();
     }
 }
