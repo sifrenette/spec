@@ -1,5 +1,7 @@
 package spec.tp3;
 
+// Simon Frenette 111 104 101 IFT
+// Mathieu Larue 111 098 142 IFT
 public class Main
 {
     // COMMENTAIRE INDIQUANT SI LES SPÉCIFICATIONS NOUS ONT AIDÉ

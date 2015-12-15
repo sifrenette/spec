@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+// Simon Frenette 111 104 101 IFT
+// Mathieu Larue 111 098 142 IFT
 public class Cas
 {
     private Repertoire repertoire;

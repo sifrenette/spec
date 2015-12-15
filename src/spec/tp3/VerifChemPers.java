@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+// Simon Frenette 111 104 101 IFT
+// Mathieu Larue 111 098 142 IFT
 public class VerifChemPers
 {
     private final Programme programme;

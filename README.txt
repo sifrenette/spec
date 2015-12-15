@@ -1,4 +1,4 @@
-Pour exécuter le programme:
+Pour executer le programme:
 
 Lancer VerifChemPers.jar.
 

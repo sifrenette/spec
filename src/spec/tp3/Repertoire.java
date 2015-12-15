@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+// Simon Frenette 111 104 101 IFT
+// Mathieu Larue 111 098 142 IFT
 public class Repertoire
 {
     private Set<Cours> cours;
@@ -23,6 +25,11 @@ public class Repertoire
         return this.cours;
     }
 
+    /**
+     *
+     * @param sigle
+     * @return le cours associé au sigle s'il est présent
+     */
     public Optional<Cours> getCoursAvecSigle(final String sigle)
     {
         return this.cours.stream().filter(c -> c.getSigle().equals(sigle)).findAny();

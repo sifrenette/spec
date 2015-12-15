@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+// Simon Frenette 111 104 101 IFT
+// Mathieu Larue 111 098 142 IFT
 public class Programme
 {
     private final Repertoire repertoire;
@@ -20,6 +22,10 @@ public class Programme
         this.remplirProgramme(path);
     }
 
+    /**
+     * @param cours
+     * @return si le programme contient cours
+     */
     public boolean contientCours(final Cours cours)
     {
         return this.obligatoires.contains(cours) || this.optionnels.contains(cours);
