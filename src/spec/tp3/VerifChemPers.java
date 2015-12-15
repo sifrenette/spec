@@ -17,6 +17,7 @@ public class VerifChemPers
 
     /**
      * Verifie le cas passé en paramètre. Si le cas n'est pas valide, retourne un message d'erreur.
+     * @return le message représentant le résultat de la vérification
      */
     public String verifierCas(final Cas cas)
     {
@@ -166,7 +167,7 @@ public class VerifChemPers
         for (CheminementPersonnaliseSession session : cas.getSessions())
         {
             if (session.getCours().stream().filter(Cours::comporteProjet).count() > 1)
-                return Optional.of("La session " + session.getNumeroSession() + " comporte plus d'un cours avec projet");
+                return Optional.of("La session " + session.getNumeroSession() + " comporte plus d'un cours avec projet.");
         }
 
         return Optional.empty();

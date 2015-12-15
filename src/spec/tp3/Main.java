@@ -2,6 +2,10 @@ package spec.tp3;
 
 public class Main
 {
+    // COMMENTAIRE INDIQUANT SI LES SPÉCIFICATIONS NOUS ONT AIDÉ
+    // Oui, les spécifications nous ont définitivement aidé à implémenter plus rapidement
+    // les vérifications, puisque nous avions déjà en tête quelles conditions vérifier.
+
     public static void main(String[] args)
     {
         Repertoire rep = new Repertoire("fichiers/repertoire.txt");
